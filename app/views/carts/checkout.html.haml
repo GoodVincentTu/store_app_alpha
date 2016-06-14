@@ -1,0 +1,32 @@
+%h1 Checkout
+
+%h2 You are checking out the following products:
+
+%ul
+  -@cart.items.each do |item|
+    %li
+      %em=item.quantity
+      =item.product.name
+      =number_to_currency item.total_price
+
+%p
+  %strong
+    Total price:
+    =number_to_currency @cart.total_price
+
+=form_for @order_form, url: orders_path do |form|
+  %h3 Some of your personal details
+  =form.fields_for :user, form.object.user do |user|
+    .form-group
+      %p=user.text_field :name, placeholder: "Name", class: "form-control input-lg"
+      %p
+        =user.text_field :email, placeholder: "Email", class: "form-control"
+        %span.help-block This will help you track your order more effectively.
+    .form-group
+      .row
+        %p.col-md-6=user.text_field :address, placeholder: "Address", class: "form-control"
+        %p.col-md-3=user.text_field :postal_code, placeholder: "Postal code / Zipcode", class: "form-control"
+        %p.col-md-3=user.text_field :city, placeholder: "City", class: "form-control"
+      %p=user.country_select :country, {priority_countries: ["GB", "US", "DE", "ES", "PT"]}, {class: "form-control"}
+
+      %p=user.text_field :phone, class: "form-control", placeholder: "Phone"

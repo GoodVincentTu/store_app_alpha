@@ -2,9 +2,14 @@ Rails.application.routes.draw do
   devise_for :users
   resources :products
 
-  resource :cart, only: [:show] do
+  resource :cart, only: [:show, :destroy] do
     post "add", path: "add/:id"
+    # delete 'cart/:id' => 'carts#destroy'
+    get :checkout
   end
+
+
+  resource :orders, only: [:index, :show, :create]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
