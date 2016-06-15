@@ -4,7 +4,8 @@ class OrdersController < ApplicationController
 
   def create
     @order_form = OrderForm.new(
-      user: User.new(order_parmas[:user])
+      user: User.new(order_params[:user]),
+      cart: @cart
     )
 
     if @order_form.save
@@ -17,7 +18,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    parmas.require(:order_form).permit(
+    params.require(:order_form).permit(
       user: [:name, :email, :address, :postal_code, :city, :country, :phone]
     )
   end
