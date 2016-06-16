@@ -39,6 +39,28 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  # devise setting
+  # Additonal settings:
+
+  # Mail setting
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: ENV["SMTP_ADDRESS"],
+    user_name: ENV["SMTP_USER"],
+    password: ENV["SMTP_PASSWORD"],
+    domain: "ourstoreapp.io",
+    authentication: "plain",
+    enable_starttls_auto: false
+  }
+
+  # payment setting
+  Braintree::Configuration.environment = :sandbox
+  # use_your_merchant_id
+  Braintree::Configuration.merchant_id = "fgg6hjtnsq3grv4h"
+  # use_your_public_key
+  Braintree::Configuration.public_key = "sv6jbmm4fmchdxsv"
+  # use_your_private_key
+  Braintree::Configuration.private_key = "bbcb251767a6cb3e3a4a2e4d8b40eba5"
 end

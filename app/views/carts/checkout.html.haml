@@ -33,4 +33,15 @@
 
       %p=user.text_field :phone, class: "form-control", placeholder: "Phone"
 
+  / payment form
+  %form#checkout{:action => "/checkout", :method => "post"}
+    #payment-form
+    %input{:type => "submit", :value => "Pay"}
+
   %p=form.submit "Place order", class: "btn btn-primary"
+
+
+:javascript
+  braintree.setup("#{@client_token}", "dropin", {
+  container: "payment-form"
+  });
