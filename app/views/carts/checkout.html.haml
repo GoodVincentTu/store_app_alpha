@@ -36,7 +36,7 @@
   / payment form
   %form#checkout{:action => "/checkout", :method => "post"}
     #payment-form
-    %input{:type => "submit", :value => "Pay"}
+    / %input{:type => "submit", :value => "Pay"}
 
   %p=form.submit "Place order", class: "btn btn-primary"
 
