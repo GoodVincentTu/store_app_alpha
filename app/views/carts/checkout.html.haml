@@ -33,10 +33,7 @@
 
       %p=user.text_field :phone, class: "form-control", placeholder: "Phone"
 
-  / payment form
-  %form#checkout{:action => "/checkout", :method => "post"}
-    #payment-form
-    / %input{:type => "submit", :value => "Pay"}
+  #payment-form
 
   %p=form.submit "Place order", class: "btn btn-primary"
 
