@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :categories
   devise_for :users
   resources :products
 
@@ -9,7 +10,7 @@ Rails.application.routes.draw do
   end
 
 
-  resource :orders, only: [:index, :show, :create] do
+  resources :orders, only: [:index, :show, :create] do
     member do
       get :new_payment
       post :pay
