@@ -3,14 +3,14 @@ Rails.application.routes.draw do
   devise_for :users
   resources :products
 
-  resource :cart, only: [:show, :destroy] do
+  resource :cart, only: [:show] do
     post "add", path: "add/:id"
     # delete 'cart/:id' => 'carts#destroy'
     get :checkout
   end
 
 
-  resources :orders, only: [:index, :show, :create] do
+  resources :orders, only: [:index, :show, :create, :update] do
     member do
       get :new_payment
       post :pay
